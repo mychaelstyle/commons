@@ -98,6 +98,19 @@ public class MFile {
     }
 
     /**
+     * get string list from a file rows.
+     * 
+     * @param filePath
+     * @param charset
+     * @return
+     * @throws IOException
+     */
+    public static List<String> fileGetContentsAsLines(String filePath, String charset) throws IOException {
+        return fileGetContentsAsLines(new File(filePath),charset);
+    }
+
+    /**
+     * get string list from a file rows.
      * 
      * @param file
      * @param charset
@@ -140,6 +153,18 @@ public class MFile {
 
     /**
      * file get contents
+     * @param filePath
+     * @param charset
+     * @return
+     * @throws IOException
+     */
+    public static String fileGetContents(String filePath, String charset)
+            throws IOException {
+        return fileGetContents(new File(filePath),charset);
+    }
+
+    /**
+     * file get contents
      * @param file
      * @param charset
      * @return
@@ -160,13 +185,14 @@ public class MFile {
 
     /**
      * get resource file contents as String
+     * @param <T>
      * @param resourceName resource path strings
      * @param charset character set strings, e.g) UTF-8
      * @param c Class for get ClassLoader
      * @return
      * @throws IOException
      */
-    public static String getResourceAsString(String resourceName, String charset, Class c) throws IOException{
+    public static <T> String getResourceAsString(String resourceName, String charset, Class<T> c) throws IOException{
         URL url = c.getClassLoader().getResource(resourceName);
         File file = new File(url.getPath());
         return fileGetContents(file,charset);

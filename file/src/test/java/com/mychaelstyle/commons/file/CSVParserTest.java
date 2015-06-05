@@ -43,12 +43,10 @@ public class CSVParserTest {
                 continue;
             }
             File[] files = dir.listFiles();
-            int count = 0;
             for(int i=0; i< files.length; i++){
                 String fileName = files[i].toString();
                 if(fileName.endsWith(".csv")/* && fileName.contains("08") && fileName.contains("31")*/){
                     System.out.println(fileName);
-                    count++;
                     File csvFile = new File(fileName);
                     CSVParser parser = new CSVParser(csvFile,"MS932");
                     try {
