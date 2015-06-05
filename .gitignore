@@ -1,8 +1,14 @@
-.gradle
+*.class
+
+# Package Files #
+#*.jar
+*.war
+*.ear
+bin/
 build/
-
-# Ignore Gradle GUI config
-gradle-app.setting
-
-# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
-!gradle-wrapper.jar
+doc/
+logs/
+.gradle
+.classpath
+.project
+.settings
