@@ -8,10 +8,12 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +30,35 @@ public class MFile {
     private MFile(){
         super();
     }
+    private FileOutputStream fileOutputStream = null;
+    private OutputStreamWriter outputStreamWriter = null;
+    private BufferedWriter bufferedWriter = null;
+
+    public MFile(File file,String charset) throws FileNotFoundException, UnsupportedEncodingException{
+        fileOutputStream = new FileOutputStream(file);
+        outputStreamWriter = new OutputStreamWriter(fileOutputStream,charset);
+        bufferedWriter = new BufferedWriter(outputStreamWriter);
+    }
+    public void print(String str) throws IOException{
+        bufferedWriter.write(str);
+        bufferedWriter.flush();
+    }
+    public void println(String str) throws IOException{
+        this.print(str+"\n");
+    }
+    public void close() throws IOException{
+        if(null!=bufferedWriter){
+            bufferedWriter.flush();
+            bufferedWriter.close();
+        }
+        if(null!=outputStreamWriter){
+            outputStreamWriter.close();
+        }
+        if(null!=fileOutputStream){
+            fileOutputStream.close();
+        }
+    }
+
     /**
      * UTF-8で一時ファイルに文字列を書き込んで保存しFileオブジェクトを返す
      * @param body
